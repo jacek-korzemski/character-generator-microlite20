@@ -6,7 +6,6 @@ import SetCharacterClass from "src/components/Modals/SetCharacterClass";
 import Feats from "src/components/Feats";
 import Stats from "src/components/Stats";
 import SetStats from "src/components/Modals/SetStats";
-import Skills from "src/components/Skills";
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -67,11 +66,20 @@ const Grid = styled.div<{
 }>`
   width: 100%;
   display: grid;
+  grid-gap: 30px;
   grid-template-columns: ${({ columnsTemplate }) => columnsTemplate};
+  table {
+    width: 100%;
+    td {
+      text-align: center;
+      padding: 0 4px;
+    }
+  }
 `;
 
 const CharacterSheet = () => {
-  const { name, characterClass, features } = useCharacterDetails();
+  const { name, characterClass, attackBonus, savingThrows } =
+    useCharacterDetails();
   const { setContent } = useModal();
   return (
     <Wrapper>
@@ -91,29 +99,33 @@ const CharacterSheet = () => {
         <label>Class:</label>
         <span>{characterClass}</span>
       </TextData>
-      <Grid columnsTemplate={"2fr 1fr"}>
+      <div>
+        <Header
+          clickable={true}
+          onClick={() => {
+            setContent(<SetStats />);
+          }}
+        >
+          Stats
+        </Header>
+        <Stats />
+      </div>
+      <Grid columnsTemplate={"1fr 1fr"}>
         <div>
           <Header>Features</Header>
-          <Feats features={features || []} />
+          <Feats />
         </div>
         <div>
-          <Header
-            clickable={true}
-            onClick={() => {
-              setContent(<SetStats />);
-            }}
-          >
-            Stats
-          </Header>
-          <Stats />
+          <Header>Attack Bonus</Header>
+          {attackBonus}
+          <Header>Saving Throws</Header>
+          {savingThrows}
         </div>
       </Grid>
-      <h3 style={{ textAlign: "center", marginTop: "10px" }}>Skills</h3>
-      <Skills />
       <h3
         style={{
           textAlign: "center",
-          marginTop: "60px",
+          marginTop: "15px",
           marginBottom: "-20px",
         }}
       >

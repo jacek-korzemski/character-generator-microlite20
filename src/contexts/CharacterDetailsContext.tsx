@@ -12,14 +12,18 @@ const CharacterDetailsContext = createContext<{
   setName?: Dispatch<SetStateAction<string>>;
   characterClass?: string;
   setCharacterClass?: Dispatch<SetStateAction<string>>;
-  armorClass?: number;
-  setArmorClass?: Dispatch<SetStateAction<number>>;
-  strength?: number;
-  setStrength?: Dispatch<SetStateAction<number>>;
-  dexterity?: number;
-  setDexterity?: Dispatch<SetStateAction<number>>;
-  mind?: number;
-  setMind?: Dispatch<SetStateAction<number>>;
+  str?: number;
+  setStr?: Dispatch<SetStateAction<number>>;
+  int?: number;
+  setInt?: Dispatch<SetStateAction<number>>;
+  wis?: number;
+  setWis?: Dispatch<SetStateAction<number>>;
+  dex?: number;
+  setDex?: Dispatch<SetStateAction<number>>;
+  con?: number;
+  setCon?: Dispatch<SetStateAction<number>>;
+  cha?: number;
+  setCha?: Dispatch<SetStateAction<number>>;
   hp?: number;
   setHp?: Dispatch<SetStateAction<number>>;
   equipement?: any[];
@@ -29,22 +33,10 @@ const CharacterDetailsContext = createContext<{
     description: string;
   }[];
   setFeatures?: Dispatch<SetStateAction<any[]>>;
-  skills?: {
-    communication: number;
-    knowledge: number;
-    physical: number;
-    subterfuge: number;
-    survival: number;
-  };
-  setSkills?: Dispatch<
-    SetStateAction<{
-      communication: number;
-      knowledge: number;
-      physical: number;
-      subterfuge: number;
-      survival: number;
-    }>
-  >;
+  attackBonus?: ReactNode;
+  setAttackBonus?: Dispatch<SetStateAction<ReactNode>>;
+  savingThrows?: ReactNode;
+  setSavingThrows?: Dispatch<SetStateAction<ReactNode>>;
 } | null>(null);
 
 const CharacterDetailsProvider = ({ children }: { children: ReactNode }) => {
@@ -53,27 +45,19 @@ const CharacterDetailsProvider = ({ children }: { children: ReactNode }) => {
     "Choose Character Class"
   );
   const [armorClass, setArmorClass] = useState<number>(0);
-  const [strength, setStrength] = useState<number>(0);
-  const [dexterity, setDexterity] = useState<number>(0);
-  const [mind, setMind] = useState<number>(0);
+  const [str, setStr] = useState<number>(0);
+  const [int, setInt] = useState<number>(0);
+  const [wis, setWis] = useState<number>(0);
+  const [dex, setDex] = useState<number>(0);
+  const [con, setCon] = useState<number>(0);
+  const [cha, setCha] = useState<number>(0);
   const [hp, setHp] = useState<number>(0);
   const [equipement, setEquipement] = useState<any[]>([]);
   const [features, setFeatures] = useState<
     { name: string; availableFromLevel: number; description: string }[]
   >([]);
-  const [skills, setSkills] = useState<{
-    communication: number;
-    knowledge: number;
-    physical: number;
-    subterfuge: number;
-    survival: number;
-  }>({
-    communication: 0,
-    knowledge: 0,
-    physical: 0,
-    subterfuge: 0,
-    survival: 0,
-  });
+  const [attackBonus, setAttackBonus] = useState<ReactNode>(<></>);
+  const [savingThrows, setSavingThrows] = useState<ReactNode>(<></>);
 
   const value = useMemo(
     () => ({
@@ -83,32 +67,43 @@ const CharacterDetailsProvider = ({ children }: { children: ReactNode }) => {
       setCharacterClass,
       armorClass,
       setArmorClass,
-      strength,
-      setStrength,
-      dexterity,
-      setDexterity,
-      mind,
-      setMind,
+      str,
+      setStr,
+      int,
+      setInt,
+      wis,
+      setWis,
+      dex,
+      setDex,
+      con,
+      setCon,
+      cha,
+      setCha,
       hp,
       setHp,
       equipement,
       setEquipement,
       features,
       setFeatures,
-      skills,
-      setSkills,
+      attackBonus,
+      setAttackBonus,
+      savingThrows,
+      setSavingThrows,
     }),
     [
       name,
       characterClass,
-      armorClass,
-      strength,
-      dexterity,
-      mind,
+      str,
+      int,
+      wis,
+      dex,
+      con,
+      cha,
       hp,
       equipement,
       features,
-      skills,
+      attackBonus,
+      savingThrows,
     ]
   );
 

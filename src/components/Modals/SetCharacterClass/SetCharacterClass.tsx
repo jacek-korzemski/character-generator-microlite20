@@ -47,7 +47,12 @@ const Option = styled.div`
     margin: 0;
   }
 
+  table {
+    width: 100%;
+  }
+
   table td {
+    text-align: center;
     vertical-align: top;
   }
   table tr td:first-child {
@@ -90,8 +95,8 @@ const SetCharacterClass = () => {
     characterClass,
     setCharacterClass,
     setFeatures,
-    setEquipement,
-    setSkills,
+    setAttackBonus,
+    setSavingThrows,
   } = useCharacterDetails();
 
   const toggleSkills = (index: number) => {
@@ -139,9 +144,10 @@ const SetCharacterClass = () => {
                   onClick={() => {
                     if (setCharacterClass) {
                       setCharacterClass(elem.name);
-                      if (setFeatures && setSkills) {
+                      if (setFeatures && setAttackBonus && setSavingThrows) {
                         setFeatures(elem.features);
-                        setSkills(elem.skills);
+                        setAttackBonus(elem.attackBonus);
+                        setSavingThrows(elem.savingThrows);
                       }
                       setContent(null);
                     }
@@ -155,21 +161,35 @@ const SetCharacterClass = () => {
             <div>
               {opened?.includes(index) && (
                 <>
+                  <h4>Details</h4>
+                  <p style={{ marginBottom: "16px" }}>
+                    Hit dice: {elem.hitDice}, starting HP: {elem.startingHp}
+                    {elem.spells && ", spells: " + elem.spells}
+                  </p>
+                  <h4>Attack bonus table:</h4>
+                  {elem.attackBonus}
+                  <h4>Saving Throws</h4>
+                  {elem.savingThrows}
                   <h4>Features</h4>
-                  <table style={{ width: "100%" }} key={`feat-${index}`}>
+                  <table>
                     <thead>
                       <tr>
-                        <td style={{ width: "25%" }}>Name</td>
-                        <td style={{ width: "75%" }}>Description:</td>
+                        <td>Name</td>
+                        <td>Description</td>
                       </tr>
                     </thead>
                     <tbody>
-                      {elem.features.map((feature, index) => (
-                        <tr key={`${index}-${feature.name}`}>
-                          <td>{feature.name}</td>
-                          <td>{feature.description}</td>
-                        </tr>
-                      ))}
+                      {elem.features.map(
+                        (
+                          feature: { name: string; description: string },
+                          index: number
+                        ) => (
+                          <tr key={index}>
+                            <td>{feature.name}</td>
+                            <td>{feature.description}</td>
+                          </tr>
+                        )
+                      )}
                     </tbody>
                   </table>
                 </>

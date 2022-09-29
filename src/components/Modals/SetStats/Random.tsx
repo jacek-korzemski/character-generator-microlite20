@@ -9,7 +9,7 @@ const Wrapper = styled.div``;
 
 const Stats = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 32px;
 `;
 
@@ -18,7 +18,6 @@ const Stat = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 30px;
 `;
 
 const Label = styled.div`
@@ -36,17 +35,24 @@ const Value = styled.div`
 `;
 
 const Random = () => {
-  const { setStrength, setDexterity, setMind } = useCharacterDetails();
+  const { setStr, setInt, setWis, setDex, setCon, setCha } =
+    useCharacterDetails();
   const { setContent } = useModal();
 
   const [newStats, setNewStats] = useState<{
     str: number;
+    int: number;
+    wis: number;
     dex: number;
-    mind: number;
+    con: number;
+    cha: number;
   }>({
     str: 0,
+    int: 0,
+    wis: 0,
     dex: 0,
-    mind: 0,
+    con: 0,
+    cha: 0,
   });
 
   const randomizeStat = () => {
@@ -56,19 +62,21 @@ const Random = () => {
   const reRoll = () => {
     let randomizedStats = {
       str: randomizeStat(),
+      int: randomizeStat(),
+      wis: randomizeStat(),
       dex: randomizeStat(),
-      mind: randomizeStat(),
+      con: randomizeStat(),
+      cha: randomizeStat(),
     };
 
     let values = Object.values(randomizedStats);
     let total = values.reduce((partialSum, a) => partialSum + a, 0);
 
-    if (total > 45) {
+    if (total / 6 > 12) {
       reRoll();
       return;
     }
-
-    if (total / 3 > 13) {
+    if ((_.min(values) || 0) > 9) {
       reRoll();
       return;
     }
@@ -89,12 +97,24 @@ const Random = () => {
           <Value>{newStats.str}</Value>
         </Stat>
         <Stat>
+          <Label>Inteligence</Label>
+          <Value>{newStats.int}</Value>
+        </Stat>
+        <Stat>
+          <Label>Wisdom</Label>
+          <Value>{newStats.wis}</Value>
+        </Stat>
+        <Stat>
           <Label>Dexterity</Label>
           <Value>{newStats.dex}</Value>
         </Stat>
         <Stat>
-          <Label>Mind</Label>
-          <Value>{newStats.mind}</Value>
+          <Label>Constitution</Label>
+          <Value>{newStats.con}</Value>
+        </Stat>
+        <Stat>
+          <Label>Charisma</Label>
+          <Value>{newStats.cha}</Value>
         </Stat>
       </Stats>
       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -107,10 +127,13 @@ const Random = () => {
         </Button>
         <Button
           onClick={() => {
-            if (setStrength && setDexterity && setMind) {
-              setStrength(newStats.str);
-              setDexterity(newStats.dex);
-              setMind(newStats.mind);
+            if (setStr && setInt && setWis && setDex && setCon && setCha) {
+              setStr(newStats.str);
+              setInt(newStats.int);
+              setWis(newStats.wis);
+              setDex(newStats.dex);
+              setCon(newStats.con);
+              setCha(newStats.cha);
             }
             setContent(null);
           }}

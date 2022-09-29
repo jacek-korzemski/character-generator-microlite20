@@ -4,9 +4,11 @@ import useCharacterDetails from "src/hooks/useCharacterDetails";
 const Wrapper = styled.div`
   margin-top: -10px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 30px;
+  margin-bottom: 30px;
 `;
 
 const Stat = styled.div`
@@ -29,15 +31,16 @@ const Value = styled.div`
     height: 42px;
     line-height: 42px;
     text-align: center;
-    font-size: 32px;
+    font-size: 24px;
     border: 1px solid rgba(0, 0, 0, 0.32);
     margin: 0;
     padding: 0;
+    color: rgba(0, 0, 0, 0.64);
   }
 `;
 
 const Stats = () => {
-  const { strength, dexterity, mind } = useCharacterDetails();
+  const { str, int, wis, dex, con, cha } = useCharacterDetails();
 
   const calculateBonus = (stat: number) => {
     let value = Math.ceil((stat - 10) / 2);
@@ -50,24 +53,45 @@ const Stats = () => {
   return (
     <Wrapper>
       <Stat>
-        <Label>STR</Label>
+        <Label>Strength</Label>
         <Value>
-          <span>{strength}</span>
-          <span>{calculateBonus(strength || 0)}</span>
+          <span>{str}</span>
+          <span>{calculateBonus(str || 0)}</span>
         </Value>
       </Stat>
       <Stat>
-        <Label>DEX</Label>
+        <Label>Inteligence</Label>
         <Value>
-          <span>{dexterity}</span>
-          <span>{calculateBonus(dexterity || 0)}</span>
+          <span>{int}</span>
+          <span>{calculateBonus(int || 0)}</span>
         </Value>
       </Stat>
       <Stat>
-        <Label>MIND</Label>
+        <Label>Wisdom</Label>
         <Value>
-          <span>{mind}</span>
-          <span>{calculateBonus(mind || 0)}</span>
+          <span>{wis}</span>
+          <span>{calculateBonus(wis || 0)}</span>
+        </Value>
+      </Stat>
+      <Stat>
+        <Label>Dexterity</Label>
+        <Value>
+          <span>{dex}</span>
+          <span>{calculateBonus(dex || 0)}</span>
+        </Value>
+      </Stat>
+      <Stat>
+        <Label>Constitution</Label>
+        <Value>
+          <span>{con}</span>
+          <span>{calculateBonus(con || 0)}</span>
+        </Value>
+      </Stat>
+      <Stat>
+        <Label>Charisma</Label>
+        <Value>
+          <span>{cha}</span>
+          <span>{calculateBonus(cha || 0)}</span>
         </Value>
       </Stat>
     </Wrapper>

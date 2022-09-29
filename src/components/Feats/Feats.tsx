@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
+import useCharacterDetails from "src/hooks/useCharacterDetails";
 
 const Table = styled.table`
   width: 100%;
@@ -22,15 +23,9 @@ const Table = styled.table`
   }
 `;
 
-const Feats = ({
-  features,
-}: {
-  features: {
-    name: string;
-    description: ReactNode;
-  }[];
-}) => {
-  return (
+const Feats = () => {
+  const { features } = useCharacterDetails();
+  return features ? (
     <Table>
       <thead>
         <tr>
@@ -39,15 +34,16 @@ const Feats = ({
         </tr>
       </thead>
       <tbody>
-        {features.map((feature, index) => (
-          <tr key={index}>
-            <td>{feature.name}</td>
-            <td>{feature.description}</td>
-          </tr>
-        ))}
+        {features &&
+          features.map((feature, index) => (
+            <tr key={index}>
+              <td>{feature.name}</td>
+              <td>{feature.description}</td>
+            </tr>
+          ))}
       </tbody>
     </Table>
-  );
+  ) : null;
 };
 
 export default Feats;

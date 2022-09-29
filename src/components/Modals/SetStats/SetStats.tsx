@@ -1,16 +1,11 @@
 import styled from "styled-components";
 import useModal from "src/hooks/useModal";
-import { useState } from "react";
-import Button from "src/components/Button";
 import Random from "src/components/Modals/SetStats/Random";
-import Predefined from "src/components/Modals/SetStats/Predefined";
-import BuyPoints from "src/components/Modals/SetStats/BuyPoints";
 
 const Wrapper = styled.div`
   position: relative;
-  height: 600px;
-  width: 600px;
-  max-width: 600px;
+  width: 720px;
+  max-width: 720px;
   max-height: 600px;
   display: flex;
   flex-direction: column;
@@ -60,14 +55,8 @@ const Top = styled.div`
   }
 `;
 
-const Buttons = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 const SetStats = () => {
   const { setContent } = useModal();
-  const [mode, setMode] = useState<string>("ran");
 
   return (
     <>
@@ -83,30 +72,7 @@ const SetStats = () => {
         </span>
       </Top>
       <Wrapper>
-        <Buttons>
-          <Button
-            className={mode === "ran" ? "button-primary" : ""}
-            onClick={() => setMode("ran")}
-          >
-            Random
-          </Button>
-          <Button
-            className={mode === "pre" ? "button-primary" : ""}
-            onClick={() => setMode("pre")}
-          >
-            Predefined
-          </Button>
-          <Button
-            className={mode === "buy" ? "button-primary" : ""}
-            onClick={() => setMode("buy")}
-          >
-            Buy points
-          </Button>
-        </Buttons>
-        {mode === "ran" && <Random />}
-        {mode === "pre" && <Predefined />}
-        {mode === "buy" && <BuyPoints />}
-        <div></div>
+        <Random />
       </Wrapper>
     </>
   );
