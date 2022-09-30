@@ -17,12 +17,6 @@ const ButtonWrapper = styled.div`
 function App() {
   const [isHidden, setIsHidden] = useState<boolean>(false);
 
-  useEffect(() => {
-    window.addEventListener("afterprint", () => {
-      setIsHidden(false);
-    });
-  }, []);
-
   return (
     <AppWrapper>
       {/* Additional components overlay */}
@@ -40,6 +34,9 @@ function App() {
               setTimeout(() => {
                 window.print();
               });
+              setTimeout(() => {
+                setIsHidden(false);
+              }, 1000);
             }}
           >
             Pobierz

@@ -78,12 +78,12 @@ const classes: any[] = [
       {
         name: "Smite",
         description:
-          "Use your action to imbue your weapon with holy energy. If you deal damage to an enemy during this turn, damaged enemy has to do saving throw agains spells. If the throw is failed, double the damage. The effect lasts for 3 turns.",
+          "Use your action to imbue your weapon with holy energy. If you deal damage to an enemy during this turn, damaged enemy has to do saving throw agains spells. If the throw is failed, add 1d4 per level to damage roll. The effect lasts for 3 turns.",
       },
       {
         name: "Turn undead",
         description:
-          "Use your action to destroy fallen undead, and prevent it from reviving.",
+          "Undead that was dealt damage by weapon with Smite effect on it, won't revive.",
       },
     ],
   },

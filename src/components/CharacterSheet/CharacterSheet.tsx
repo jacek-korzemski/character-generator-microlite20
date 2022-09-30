@@ -77,28 +77,67 @@ const Grid = styled.div<{
   }
 `;
 
+const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  label {
+    font-size: 16px;
+    text-align: center;
+    margin: 0 0 3px 0;
+  }
+  div {
+    width: 54px;
+    height: 54px;
+    border: 1px solid black;
+  }
+`;
+
 const CharacterSheet = () => {
   const { name, characterClass, attackBonus, savingThrows } =
     useCharacterDetails();
   const { setContent } = useModal();
   return (
     <Wrapper>
-      <TextData
-        onClick={() => {
-          setContent(<SetPlayerName />);
-        }}
-      >
-        <label>Character Name:</label>
-        <span>{name}</span>
-      </TextData>
-      <TextData
-        onClick={() => {
-          setContent(<SetCharacterClass />);
-        }}
-      >
-        <label>Class:</label>
-        <span>{characterClass}</span>
-      </TextData>
+      <Grid columnsTemplate="8fr 1fr 1fr 1fr">
+        <div>
+          <TextData
+            onClick={() => {
+              setContent(<SetPlayerName />);
+            }}
+          >
+            <label>Character Name:</label>
+            <span>{name}</span>
+          </TextData>
+          <TextData
+            onClick={() => {
+              setContent(<SetCharacterClass />);
+            }}
+          >
+            <label>Class:</label>
+            <span>{characterClass}</span>
+          </TextData>
+        </div>
+        <div>
+          <Box>
+            <label>AB</label>
+            <div></div>
+          </Box>
+        </div>
+        <div>
+          <Box>
+            <label>AC</label>
+            <div></div>
+          </Box>
+        </div>
+        <div>
+          <Box>
+            <label>HP</label>
+            <div></div>
+          </Box>
+        </div>
+      </Grid>
       <div>
         <Header
           clickable={true}

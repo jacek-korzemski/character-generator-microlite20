@@ -97,6 +97,7 @@ const SetCharacterClass = () => {
     setFeatures,
     setAttackBonus,
     setSavingThrows,
+    setHp,
   } = useCharacterDetails();
 
   const toggleSkills = (index: number) => {
@@ -144,10 +145,16 @@ const SetCharacterClass = () => {
                   onClick={() => {
                     if (setCharacterClass) {
                       setCharacterClass(elem.name);
-                      if (setFeatures && setAttackBonus && setSavingThrows) {
+                      if (
+                        setFeatures &&
+                        setAttackBonus &&
+                        setSavingThrows &&
+                        setHp
+                      ) {
                         setFeatures(elem.features);
                         setAttackBonus(elem.attackBonus);
                         setSavingThrows(elem.savingThrows);
+                        setHp(elem.startHp);
                       }
                       setContent(null);
                     }
@@ -163,7 +170,7 @@ const SetCharacterClass = () => {
                 <>
                   <h4>Details</h4>
                   <p style={{ marginBottom: "16px" }}>
-                    Hit dice: {elem.hitDice}, starting HP: {elem.startingHp}
+                    Hit dice: {elem.hitDice}, starting HP: {elem.startHp}
                     {elem.spells && ", spells: " + elem.spells}
                   </p>
                   <h4>Attack bonus table:</h4>
