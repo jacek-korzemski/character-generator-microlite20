@@ -254,12 +254,12 @@ const classes: any[] = [
       {
         name: "Arcane blast",
         description:
-          "You can use your bonus action to shot a magic missle (your hands has to be able to point at target, roll standard magic attack roll) that deals 1d4 on hit. Additional 1d4 damage per 4 levels.",
+          "You can use your bonus action to shot a magic missle (your hands has to be able to point at target, roll standard magic attack roll) that deals 1d4 on hit. Additional 1d4 damage per level.",
       },
       {
         name: "Minor magic",
         description:
-          "You can cast level 0 spells, outside combat without preparing it and without using spell slot. Every 3rd level (3, 6, 9 etc.) increase the spell level that you can use this way by 1.",
+          "You can cast level 0 spells, outside combat without preparing it and without using spell slot. Every level increase the spell level that you can use this way by 1.",
       },
     ],
   },
@@ -337,7 +337,7 @@ const classes: any[] = [
       {
         name: "Sneak attack",
         description:
-          "During combat, if you attack an enemy, and you have advantage on the attack roll, get +2 bonus to attack roll (melee only), and double the damage dices. On level 1 you can use it once per turn. Increase this number every 3rd level (3, 6, 9 etc).",
+          "During combat, if you attack an enemy, and you have advantage on the attack roll, get +2 bonus to attack roll (melee only), and double the weapon damage dices.",
       },
       {
         name: "Riposte",

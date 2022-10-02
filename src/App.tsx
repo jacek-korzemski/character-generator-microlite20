@@ -17,6 +17,10 @@ const ButtonWrapper = styled.div`
 function App() {
   const [isHidden, setIsHidden] = useState<boolean>(false);
 
+  useEffect(() => {
+    console.log("render");
+  });
+
   return (
     <AppWrapper>
       {/* Additional components overlay */}
@@ -25,7 +29,7 @@ function App() {
       <ContextMenuContainer />
 
       {/* Main Content */}
-      <CharacterSheet />
+      <CharacterSheet readyToPrint={isHidden} />
       {!isHidden && (
         <ButtonWrapper>
           <Button

@@ -9,10 +9,10 @@ import SetStats from "src/components/Modals/SetStats";
 
 const Wrapper = styled.div`
   margin: 0 auto;
-  padding: 16px;
+  padding: 16px 0;
   width: 100%;
   height: 100%;
-  max-width: calc(960px - 16px - 16px - 2px);
+  max-width: calc(860px - 16px - 16px - 2px);
 `;
 
 const TextData = styled.div`
@@ -94,7 +94,7 @@ const Box = styled.div`
   }
 `;
 
-const CharacterSheet = () => {
+const CharacterSheet = ({ readyToPrint }: { readyToPrint: boolean }) => {
   const { name, characterClass, attackBonus, savingThrows } =
     useCharacterDetails();
   const { setContent } = useModal();
@@ -108,7 +108,9 @@ const CharacterSheet = () => {
             }}
           >
             <label>Character Name:</label>
-            <span>{name}</span>
+            <span>
+              {name} {!readyToPrint && "🛠"}
+            </span>
           </TextData>
           <TextData
             onClick={() => {
@@ -116,12 +118,14 @@ const CharacterSheet = () => {
             }}
           >
             <label>Class:</label>
-            <span>{characterClass}</span>
+            <span>
+              {characterClass} {!readyToPrint && "🛠"}
+            </span>
           </TextData>
         </div>
         <div>
           <Box>
-            <label>AB</label>
+            <label>Level</label>
             <div></div>
           </Box>
         </div>
@@ -145,7 +149,7 @@ const CharacterSheet = () => {
             setContent(<SetStats />);
           }}
         >
-          Stats
+          Stats {!readyToPrint && "🛠"}
         </Header>
         <Stats />
       </div>
