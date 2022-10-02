@@ -95,6 +95,11 @@ const Box = styled.div`
 `;
 
 const CharacterSheet = ({ readyToPrint }: { readyToPrint: boolean }) => {
+  const editIcon = (
+    <span style={{ display: "inline", fontStyle: "normal", fontSize: "79%" }}>
+      🖊
+    </span>
+  );
   const { name, characterClass, attackBonus, savingThrows } =
     useCharacterDetails();
   const { setContent } = useModal();
@@ -107,20 +112,16 @@ const CharacterSheet = ({ readyToPrint }: { readyToPrint: boolean }) => {
               setContent(<SetPlayerName />);
             }}
           >
-            <label>Character Name:</label>
-            <span>
-              {name} {!readyToPrint && "🛠"}
-            </span>
+            <label>{!readyToPrint && editIcon} Character Name:</label>
+            <span>{name}</span>
           </TextData>
           <TextData
             onClick={() => {
               setContent(<SetCharacterClass />);
             }}
           >
-            <label>Class:</label>
-            <span>
-              {characterClass} {!readyToPrint && "🛠"}
-            </span>
+            <label>{!readyToPrint && editIcon} Class:</label>
+            <span>{characterClass}</span>
           </TextData>
         </div>
         <div>
@@ -149,7 +150,7 @@ const CharacterSheet = ({ readyToPrint }: { readyToPrint: boolean }) => {
             setContent(<SetStats />);
           }}
         >
-          Stats {!readyToPrint && "🛠"}
+          {!readyToPrint && editIcon} Stats
         </Header>
         <Stats />
       </div>
